@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View v) {
                if(conectado){
 
-                   connectedThread.enviar("f");
+                   connectedThread.enviar("f","Texto Aleatorio1");
                }else {
                    Toast.makeText(MainActivity.this, "Bluetooth não esta conectado!", Toast.LENGTH_SHORT).show();
                }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View v) {
                if(conectado){
 
-                   connectedThread.enviar("b");
+                   connectedThread.enviar("b", "Texto Aleatorio2");
                }else {
                    Toast.makeText(MainActivity.this, "Bluetooth não esta conectado!", Toast.LENGTH_SHORT).show();
                }
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         try {
-            connectedThread.enviar("b");
+            connectedThread.enviar("b","Texto Aleatorio2");
         } catch (Exception e) {
 
         }
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         try {
-            connectedThread.enviar("b");
+            connectedThread.enviar("b", "Texto Aleatorio2");
         } catch (Exception e) {
 
         }
@@ -221,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /* Call this from the main activity to send data to the remote device */
-        public void enviar(String dadosEnviar) {
+        public void enviar(String codigo, String label) {
+            String dadosEnviar = codigo+","+label+"*";
             byte[] msgBuffer = dadosEnviar.getBytes();
             try {
                 mmOutStream.write(msgBuffer);
